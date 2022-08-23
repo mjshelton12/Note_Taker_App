@@ -1,5 +1,5 @@
 const express = require('express');
-const { fstat } = require('fs');
+// const { fstat } = require('fs');
 const path = require('path');
 const fs = require('fs');
 
@@ -26,9 +26,27 @@ app.get('/api/notes', (req, res) => {
 })
 
 app.post('/api/notes', (req, res) => {
-    
+    fs.readFile('./db/db.json', 'utf8', (err, data) =>{
+        if(err) {
+            console.log(err)
+        } else {
+            const allNotes = JSON.parse(data)
+            const newNote = req.body
+            allNotes.push(newNote)
+            
+            fs.writeFile('./db/db.json', JSON.stringify(allNotes), (err) =>
+            err
+                ? console.log(err)
+                : console.log("Your note has been saved!")
+            )
+        res.json("New note has been added to db.json")
+        }
+    })
 })
 
 app.listen(PORT, () => {
     console.log(`Server started at port ${PORT}`)
 })
+
+
+//uuid
