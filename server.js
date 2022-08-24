@@ -1,5 +1,5 @@
 const express = require('express');
-// const { fstat } = require('fs');
+const uuidv1 = require('uuid');
 const path = require('path');
 const fs = require('fs');
 
@@ -32,6 +32,7 @@ app.post('/api/notes', (req, res) => {
         } else {
             const allNotes = JSON.parse(data)
             const newNote = req.body
+            newNote.id = uuidv1()
             allNotes.push(newNote)
             
             fs.writeFile('./db/db.json', JSON.stringify(allNotes), (err) =>
@@ -45,7 +46,7 @@ app.post('/api/notes', (req, res) => {
 })
 
 app.listen(PORT, () => {
-    console.log(`Server started at port ${PORT}`)
+    console.log(`Server listening at port ${PORT}`)
 })
 
 
