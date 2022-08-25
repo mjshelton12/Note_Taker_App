@@ -11,7 +11,7 @@
 
 ## Live Site
 
-[Live Note Taker, Deployed on Heroku](https://mighty-wave-63436.herokuapp.com/notes)
+[Live Note Taker, Deployed on Heroku](https://mighty-wave-63436.herokuapp.com)
 
 ## Overview of Site
 
