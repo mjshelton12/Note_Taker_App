@@ -48,21 +48,18 @@ app.post('/api/notes', (req, res) => {
 
 app.delete('/api/notes/:id', (req, res) => {
     let noteToDelete = req.params.id
-    console.log(noteToDelete)
     fs.readFile('./db/db.json', 'utf8', (err, data) =>{
         if(err) {
             console.log(err)
         } else {
             const dbJson = JSON.parse(data)
-
             for (let i = 0; i < dbJson.length; i++) {
                 if (dbJson[i].id === noteToDelete) {
                     dbJson.splice(i, 1);
-                    console.log(dbJson)
                     fs.writeFile('./db/db.json', JSON.stringify(dbJson), (err) =>
             err
                 ? console.log(err)
-                : console.log("You note was successfully deleted!")
+                : console.log("Your note was successfully deleted!")
                 )
                 }
             }
