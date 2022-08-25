@@ -11,7 +11,7 @@
 
 ## Live Site
 
-[Live Note Taker, Deployed on Heroku](https://mjshelton12.github.io/Note_Taker_App/)
+[Live Note Taker, Deployed on Heroku](https://mighty-wave-63436.herokuapp.com/notes)
 
 ## Overview of Site
 
