@@ -2,6 +2,7 @@ const express = require('express');
 const uuidv1 = require('uuid');
 const path = require('path');
 const fs = require('fs');
+const { json } = require('express');
 
 const app = express();
 const PORT = 3001;
@@ -41,6 +42,32 @@ app.post('/api/notes', (req, res) => {
                 : console.log("Your note has been saved!")
             )
         res.json("New note has been added to db.json")
+        }
+    })
+})
+
+app.delete('/api/notes/:id', (req, res) => {
+    let noteToDelete = req.params.id
+    fs.readFile('./db/db.json', 'utf8', (err, data) =>{
+        if(err) {
+            console.log(err)
+        } else {
+            const dbJson = JSON.parse(data)
+
+            for (let i = 0; i < dbJson.length; i++) {
+                if (dbJson[i].id === noteToDelete) {
+                    dbJson.splice(i, 1);
+                    return
+                }
+            }
+        
+            fs.writeFile('./db/db.json', JSON.stringify(dbJson), (err) =>
+            err
+                ? console.log(err)
+                : console.log("You note was successfully deleted!")
+            )
+
+            res.send("Note successfully deleted")
         }
     })
 })
